@@ -27,6 +27,9 @@ Algorithm Implementation:
     # Stack Implementation
     [(d,1),(a,2), , , , ->
 
+Complexities:
+    Time: O(n)
+    Space: O(n)
 """
 
 
