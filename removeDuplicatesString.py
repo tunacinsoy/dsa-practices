@@ -64,3 +64,5 @@ def remove_duplicates(input: str, k: int) -> str:
 
 assert remove_duplicates("daaabbbaa", 3) == "daa"
 assert remove_duplicates("pbbcggttciiippooaais", 2) == "ps"
+
+print("All tests passed!")

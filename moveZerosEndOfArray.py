@@ -74,3 +74,5 @@ assert moveZerosToEnd([0, 1, 0, 3, 12]) == [1, 3, 12, 0, 0]
 assert moveZerosToEnd([0, 0, 0, 0, 1]) == [1, 0, 0, 0, 0]
 
 assert moveZerosToEnd([1, 2, 3, 4, 5]) == [1, 2, 3, 4, 5]
+
+print("All tests passed!")
