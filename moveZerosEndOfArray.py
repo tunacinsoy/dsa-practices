@@ -15,9 +15,6 @@ Usage:
 Arguments:
     None
 
-Author:
-    Tuna Cinsoy
-
 Date:
     2024-11-26
 
