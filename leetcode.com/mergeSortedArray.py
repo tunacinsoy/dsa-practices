@@ -49,58 +49,81 @@ Complexities:
   Space: O(1), we do modification in place, we do not use any other space
 """
 
+from typing import List
 
-def merge_sorted_array(nums1: list[int], nums2: list[int], m: int, n: int):
 
-    if m + n == 0:
-        return
+class Solution:
+    def merge_sorted_array(
+        self, nums1: List[int], nums2: List[int], m: int, n: int
+    ) -> None:
+        nums1_pointer = m - 1
+        dest_pointer = m + n - 1
+        nums2_pointer = n - 1
 
-    nums1_pointer = m - 1
-    dest_pointer = m + n - 1
-    nums2_pointer = n - 1
+        while nums2_pointer >= 0 and nums1_pointer >= 0:
+            if nums2[nums2_pointer] >= nums1[nums1_pointer]:
+                nums1[dest_pointer] = nums2[nums2_pointer]
+                nums2_pointer -= 1
+            else:
+                nums1[dest_pointer] = nums1[nums1_pointer]
+                nums1_pointer -= 1
 
-    # If we are using pointers to traverse through lists,
-    # we need to check indexOutOfBounds conditions with >= operators
-    while nums2_pointer >= 0 and nums1_pointer >= 0:
-        if nums2[nums2_pointer] >= nums1[nums1_pointer]:
+            dest_pointer -= 1
+
+        while nums2_pointer >= 0:
             nums1[dest_pointer] = nums2[nums2_pointer]
+            dest_pointer -= 1
             nums2_pointer -= 1
-        else:
-            nums1[dest_pointer] = nums1[nums1_pointer]
-            nums1_pointer -= 1
-
-        dest_pointer -= 1
-
-    # CASE2: The elements of nums1 are all greater than nums2, so nums1_pointer goes to minus index before nums2_pointer
-    # We need to write the remaining indexes to nums1 list
-    while nums2_pointer >= 0:
-        nums1[dest_pointer] = nums2[nums2_pointer]
-        dest_pointer -= 1
-        nums2_pointer -= 1
-
-    return nums1
 
 
-arr1 = [1, 2, 3, 0, 0, 0]
-arr2 = [2, 4, 6]
-m = 3
-n = 3
+# Test cases
+def test_merge_sorted_array():
+    solution = Solution()
 
-assert merge_sorted_array(arr1, arr2, m, n) == [1, 2, 2, 3, 4, 6]
+    nums1 = [1, 2, 3, 0, 0, 0]
+    nums2 = [2, 4, 6]
+    m = 3
+    n = 3
+    solution.merge_sorted_array(nums1, nums2, m, n)
+    assert nums1 == [1, 2, 2, 3, 4, 6]
 
-arr1 = [0, 0, 0]
-arr2 = [2, 4, 6]
-m = 0
-n = 3
+    nums1 = [0, 0, 0]
+    nums2 = [2, 4, 6]
+    m = 0
+    n = 3
+    solution.merge_sorted_array(nums1, nums2, m, n)
+    assert nums1 == [2, 4, 6]
 
-assert merge_sorted_array(arr1, arr2, m, n) == [2, 4, 6]
+    nums1 = []
+    nums2 = []
+    m = 0
+    n = 0
+    solution.merge_sorted_array(nums1, nums2, m, n)
+    assert nums1 == []
+
+    nums1 = [4, 5, 6, 0, 0, 0]
+    nums2 = [1, 2, 3]
+    m = 3
+    n = 3
+    solution.merge_sorted_array(nums1, nums2, m, n)
+    assert nums1 == [1, 2, 3, 4, 5, 6]
+
+    nums1 = [1]
+    nums2 = []
+    m = 1
+    n = 0
+    solution.merge_sorted_array(nums1, nums2, m, n)
+    assert nums1 == [1]
+
+    nums1 = [0]
+    nums2 = [1]
+    m = 0
+    n = 1
+    solution.merge_sorted_array(nums1, nums2, m, n)
+    assert nums1 == [1]
+
+    print("All test cases passed!")
 
 
-arr1 = []
-arr2 = []
-m = 0
-n = 0
-
-assert merge_sorted_array(arr1, arr2, m, n) == None
-
-print("all tests passed!")
+# Run the tests
+test_merge_sorted_array()
