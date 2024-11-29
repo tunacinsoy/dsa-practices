@@ -10,7 +10,7 @@ Description:
   Example:
 
   prices = [1,2,3,4,5,6] -> profit = 5
-  prices = [3,4,2,5,6,7,1] -> profit = 6
+  prices = [3,4,2,5,6,7,1] -> profit = 5
   prices = [] -> profit = 0
   prices = [1,1,1,1,1] -> profit = 0
 
