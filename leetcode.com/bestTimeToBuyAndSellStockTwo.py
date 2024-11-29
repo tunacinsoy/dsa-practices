@@ -102,7 +102,3 @@ def test_max_profit_subtle_second():
 
 test_max_profit_subtle_second()
 print("All tests passed!")
-
-
-for i in range(1, 0):
-    print(i)
