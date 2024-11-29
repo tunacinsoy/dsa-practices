@@ -51,7 +51,7 @@ Constraints:
 Complexities:
   Subtle Approach:
     Time: O(n) where n is the length of nums list
-    Space: O(1), we only use one additional variable to store max_jump
+    Space: O(1), we only use one additional variable to store farthest
 """
 
 from typing import List
@@ -62,17 +62,17 @@ class Solution:
 
         # This value represents:
         # From the starting position of nums list, which index is the farthest that I can jump to?
-        max_jump = 0
+        farthest = 0
         for i in range(len(nums)):
             # If I cannot jump to the current index from the beginning of the list, return false
-            if i > max_jump:
+            if i > farthest:
                 return False
 
-            # Can I jump even farther from the current index compared to previous max_jump?
-            max_jump = max(max_jump, nums[i] + i)
+            # Can I jump even farther from the current index compared to previous farthest?
+            farthest = max(farthest, nums[i] + i)
 
             # If we can jump to the last element of the nums list, then we are good
-            if max_jump >= len(nums) - 1:
+            if farthest >= len(nums) - 1:
                 return True
 
 
