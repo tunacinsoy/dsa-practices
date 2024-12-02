@@ -42,12 +42,14 @@ Algorithm Implementation:
     # profit = [sell - buy] -> if < 0, return 0
 
   Subtle Approach:
-    # In a single iteration, we modify the min value (if curr < min), and we will care about the rest of the prices in the list.
-              P
+    # The left points to the buy day, r points to sell day
+    # if r>l => check the profit is greater than max_profit
+    # else: do l=r, since we found a lower point then previous one
+
+                r
+              l
     prices = [1,2,3,4,5,6] -> 5
 
-    min_price = 1
-    max_profit = 0
 
 Complexities:
   Naive Approach:
@@ -90,6 +92,24 @@ class Solution:
                 max_profit = price - min_price
         return max_profit
 
+    def max_profit_subtle_two_pointers(self, prices: List[int]) -> int:
+
+        if len(prices) <= 1:
+            return 0
+
+        l = 0
+        r = 1
+        max_profit = 0
+
+        while r < len(prices):
+            if prices[r] > prices[l]:
+                max_profit = max(max_profit, prices[r] - prices[l])
+            else:
+                l = r
+            r += 1
+
+        return max_profit
+
 
 def test_max_profit_naive():
 
@@ -124,6 +144,19 @@ def test_max_profit_subtle():
 
     prices = [7, 6, 4, 3, 1]
     assert solution.max_profit_subtle(prices) == 0
+
+    prices = [7, 1, 5, 3, 6, 4]
+    solution.max_profit_naive(prices)
+    assert solution.max_profit_subtle_two_pointers(prices) == 5
+
+    prices = [1, 2, 3]
+    assert solution.max_profit_subtle_two_pointers(prices) == 2
+
+    prices = [9, 9, 9]
+    assert solution.max_profit_subtle_two_pointers(prices) == 0
+
+    prices = [7, 6, 4, 3, 1]
+    assert solution.max_profit_subtle_two_pointers(prices) == 0
 
 
 test_max_profit_naive()
