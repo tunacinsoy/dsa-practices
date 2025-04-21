@@ -30,7 +30,6 @@ git commit --amend
 git reset --hard HEAD~1
 ```
 ---
-> [!NOTE]
 > **Note:** In Git, `origin` is the default name for a remote repository from which a local repository was cloned. It serves as a shorthand reference to that remote repository. Common uses of `origin` in Git commands include:
 > 
 > - `git push origin branch_name`: Pushes changes from your local branch to the remote branch on the `origin` repository.
@@ -38,7 +37,6 @@ git reset --hard HEAD~1
 > - `git fetch origin`: Fetches all updates from the `origin` repository without merging them.
 
 ---
-> [!NOTE]
 > **Note:** The `--set-upstream` (or `-u`) option in Git is used to set the upstream branch for a local branch. This allows you to link your local branch to a remote branch, making it easier to use `git pull` and `git push` without specifying the remote and branch names every time. Here's how it's typically used:
 > 
 > - `git push --set-upstream origin branch_name` or `git push -u origin branch_name`: This command pushes the local branch to the specified remote branch on `origin` and sets the remote branch as the upstream for the local branch.

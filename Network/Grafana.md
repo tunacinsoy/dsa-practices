@@ -1,5 +1,4 @@
 
-> [!NOTE] What is Grafana?
 > Grafana is a leading open source platform for observability and monitoring, offering dynamic dashboards and robust alerting capabilities. It enables users to visualize data from diverse sources while setting up alerts for proactive issue detection.
 > 
 > ![](attachment/d7f5639128814d14fefec738123e0590.png)

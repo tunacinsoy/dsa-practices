@@ -46,7 +46,6 @@ watch docker ps -a
 ``` 
 ---
 
-> [!NOTE] Where Are the Logs of Containers Stored?
 > **Note:** The logs of containers are stored in directory: `/var/lib/docker/containers/<container_id>/<container_id>-json.log` ' if the log driver is `json-file` configured in `/etc/docker/daemon.json`. Since containers are ephemeral and once they are deleted, all of its files are also deleted, we need to store the logs in some other place, and it could be splunk, awslogs, gcplogs etc.
 
 ```bash
@@ -64,7 +63,6 @@ docker compose down --volumes
 docker compose restart <service_name>
 ``` 
 
-> [!NOTE] What is the Effect of Deleting Volumes in Docker Compose?
 > Since we mount the volume of redis into host filesystem, even after we restart the redis service, the data persists there. However, if we use `docker compose down --volumes` then it will be gone ofc, since we are completely deleting the resources.
 > 
 
@@ -73,16 +71,13 @@ docker compose restart <service_name>
 docker history <image_name:tag>
 ``` 
 
-> [!NOTE] Why we Do Not Use Sudo in Dockerfile?
 > 
 > **Note**: In dockerfile, we are not using command `sudo` since all of the commands run as root user by default. 
 > 
 
-> [!NOTE] Why apt upgrade is not followed by apt update in Dockerfile?
 > Usually, `apt update` followed by the package that needs to be installed will suffice; since `apt upgrade` will upgrade all installed packages, which are not necessary to use. For instance, `apt update && apt install -y curl` will fetch the latest information about available packages, then will install curl.
 > 
 
-> [!NOTE] What is daemon off?
 > Note: We use `CMD ["nginx", "-g", "daemon off;"]` because docker expects the container to run on the foreground, and the  `daemon off;` does that. If the main process within container exits, then container stops. 
 > 
 
@@ -96,25 +91,19 @@ docker rmi <repository_name:tag>
 docker exec -it <container_name> /bin/sh
 ``` 
 
-> [!NOTE] What Happens If Workdir Directory Does Not Exist?
 > 
 > **Note**: When we use `WORKDIR` directive, and if the following directory does not exist, docker creates it automatically.
 > 
 
-> [!NOTE] Where to Find Base Images?
 > **Note**: Base images can be found from dockerhub. For instance:
 > 	 python alpine: https://hub.docker.com/_/python/tags?page=&page_size=&ordering=&name=alpine
 
-> [!NOTE] How to Make Dockerfile Ignore Files or Folders During Copy Directive?
 > **Note**: For dockerfile to ignore some files or folders during copy process, we can create `.dockerignore` file and put the names in there.
 
-> [!NOTE] What is the Difference Between RUN and CMD directives?
 > The RUN directives are used to execute statements within the container filesystem to build and customize the container image, thus modifying the image layers. The idea of using a CMD command is to provide the default command(s) with the container image that will be executed at runtime.
 
-> [!NOTE] What is the Difference Between ENTRYPOINT and CMD Directives?
 > Every Docker container has a default `ENTRYPOINT – /bin/sh -c`. Anything you add to CMD is appended post-ENTRYPOINT and executed; for example, `CMD ["nginx", "-g", "daemon off;"]` will be generated as `/bin/sh -c nginx -g daemon off`. 
 
-> [!NOTE] When to Use `CMD`; When to Use `ENTRYPOINT`?
 > **Note**: Flexibility -> Use `CMD` when you want to provide default arguments to an entrypoint command but still allow the user to override it. Use `ENTRYPOINT` when you want to ensure a specific command is always executed. 
 > ```bash
 > FROM ubuntu
@@ -131,7 +120,6 @@ docker exec -it <container_name> /bin/sh
 docker build --progress=plain -t <image_name:tag> .
 ```
 
-> [!NOTE] Why we need privilege access to run `docker build` within a container?
 > * **Docker Daemon Communication**: The `docker build` command interacts with the Docker daemon to perform the build process. To communicate with the Docker daemon, the container needs access to the Docker socket (`/var/run/docker.sock`), which typically requires elevated permissions.
 
 ---

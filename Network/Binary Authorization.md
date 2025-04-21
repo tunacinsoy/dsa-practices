@@ -2,7 +2,6 @@
 
 ![](attachment/8b13bba32983b264308850185240ce2c.png)
 
-> [!NOTE] What is Binary Authorization?
 > Binary authorization is a deploy-time security mechanism that ensures that only trusted binary files are deployed within your environments. In the context of containers and Kubernetes, binary authorization uses signature validation and ensures that only container images signed by a trusted authority are deployed within Kubernetes cluster. 
 > ![](attachment/4e5d98666aae1f4102806ad85b24651b.png)
 > In our case, terraform needs to have access getPrivateKey for signing operation. Plus, it also needs to have permission to get public key for verification.

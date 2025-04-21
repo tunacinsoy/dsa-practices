@@ -69,7 +69,6 @@ sudo -v
 Ctrl + Shift + R
 ```
 ---
-> [!NOTE] What's the expression `git(1)`?
 > The notation `git(1)` refers to the section of the Unix or Linux manual where you can find information about the `git` command. In this case, the number `1` indicates that `git` is a **user command** found in section 1 of the manual.
 > 
 > - `1`: Executable programs or shell commands
@@ -83,12 +82,10 @@ Ctrl + Shift + R
 > 
 > To view the `git(1)` manual, you can run `man 1 git` in your terminal.
 
-> [!NOTE] What are the reserved port numbers?
 > Note that port numbers 0–1023 are restricted and can only be used by the
 > root user, so it is better to avoid choosing one of those and pick something else, if it
 > is not already in use by a different process. For instance, port number 8001 is usually free and is frequently used for local HTTP servers.
 
-> [!NOTE] What is the location of Log files in UNIX system?
 > Usually, most system log files of a UNIX system can be found under the
 > `/var/log` directory.
 
@@ -110,7 +107,6 @@ grep -rnw '.' -e 'stderr' | fzf
 Compose Key(alt gr) + e + = # prints €
 ```
 
-> [!NOTE] What are standard input, standard output and standard error?
 > By default, all UNIX systems support three special and standard filenames: /dev/stdin, /dev/stdout, and /dev/stderr, which can also be accessed using the file descriptors 0, 1, and 2, respectively. These three file descriptors are also called standard input, standard output, and standard error, respectively.
 > 
 > For instance, when we type `cat 1.txt`,  the argument that `cat` takes is the stdin, and then `cat` writes the content of it to its `stdout`.
@@ -121,7 +117,6 @@ Compose Key(alt gr) + e + = # prints €
 > 
 > `ls -a | grep 'Desktop'`  We are actually passing the stdout of `ls -a` as a stdin for `grep` command.
 
-> [!NOTE] How many process categories are there in Linux kernel?
 > There are three process categories: user processes, daemon processes, and kernel processes. User processes run in user space and usually have no special access rights. Daemon processes are programs that can be found in the user space and run in the background without the need for a terminal. Kernel processes are executed in kernel space only and can fully access all kernel data structures.
 
 ```bash
@@ -156,7 +151,6 @@ export -p | grep 'ARGO' > 1.txt
 printenv
 ```
 
-> [!NOTE] What is the difference between big endian and little endian?
 > In a big endian representation, bytes are read from left to right, while little endian reads bytes from right to left. For the 0x01234567 value, which requires 4 bytes for storing, the big endian representation is 01 | 23 | 45 | 67; 
 > whereas the little endian representation is 67 | 45 | 23 | 01.
 

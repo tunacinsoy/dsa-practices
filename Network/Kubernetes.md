@@ -13,7 +13,6 @@ kubectl get nodes -o wide
 kubectl run <pod_name> --image=<image_name>
 ```
 
-> [!NOTE]
 > **Note**: `kubectl run busybox --image=busybox` will result in CrashLoopBackError, because busybox is not a long running process, that's why it just stops after creation. Instead;
 > `kubectl run busybox --image=busybox --command -- /bin/sh -c "sleep 3600"` command should be used to keep busybox running for 1 hour. Then,  it is possible to exec into it using:
 > `kubectl exec -it busybox -- /bin/sh`.
@@ -44,7 +43,6 @@ kubectl logs <pod_name> -c <container_name>
 kubectl exec -it <pod_name> -c <container_name> -- /bin/bash
 ```  
 
-> [!NOTE]
 > **Note:** If we modify something in the pod using `exec -it`, it will remain there until pod gets deleted. So, it should only be used for diagnosing stuff, if we want to change something, we should do this change in the application code, or in dockerfile, and then deploy the new image.
 
 ```bash
@@ -55,14 +53,12 @@ kubectl describe <pod_name>
 kubectl describe externalsecret mongodb-creds -n blog-app
 ``` 
 
-> [!NOTE]
 > **Note:** Kubernetes offers three types of probes, and they are 'startup probe', 'readiness probe', and 'liveness probe'. Once one of these checks fail, the pod will be terminated and restarted.
 > ![](attachment/0680055b89a5e3d49a36d99c628d676c.png)
 > 
 > 
 > `['sh', '-c', 'mkdir -p /usr/share/nginx/html && wget -O /usr/share/nginx/html/index.html http://example.com']` === execute shell within container, and use -c flag to tell the shell to execute the following string. `mkdir -p` makes directories, even if one of the parents do not exist. `wget -O` downloads the URL, and saves it to the directory.
 
-> [!NOTE]
 > **Note:** In 'init container', before the main container gets bootstrapped, the init container gets initialized first, and after it does its operations (changing index.html file by using `wget -O`, arranging folder structure using `mkdir -p` etc.) its life-cycle ends, and the main container starts. Its not efficient though, since it delays the start-up time of main container. These configurations should be handled in dockerfile.
 
 ```bash
@@ -109,7 +105,6 @@ kubectl delete -f <replicaSet_yaml_file_name>`
 ``` 
 ---
 
-> [!NOTE] Deployment - ReplicaSets - Pods Relationship
 > **Note:** Kubernetes deployments create replicaSets to manage pods under the hood. For stateful deployments (dbs, caches) use of StatefulSet resource is recommended.
 > ![](attachment/4baf4d01dc3c648da1e2baf687765e5b.png)
 > 
@@ -138,33 +133,25 @@ kubectl rollout history deployment {deployment_name}
 kubectl rollout undo <deployment_name (deployment/nginx-deployment>`
 ``` 
 
-> [!NOTE] What is Recreate Deployment Strategy?
 > **Note:** **Recreate** deployment strategy spins down old replicaSet resource and creates a new one. It introduces downtime, so it should not be used in prod environment. The old replicaSet does not get deleted, since we might need to roll-back to previous state.
 > ![](attachment/bb7e8647c0385b096be620f4a13a4360.png)
 > 
 
-> [!NOTE] What is Rolling Update Deployment Strategy?
 > **RollingUpdate** deployment strategy initializes new replicaSet, and simultaneously spins down the old replicaSet, while provisioning the new one. It is the default deployment strategy.
 > ![](attachment/c6627158c52a88f33ffd8351b5303e28.png)
 > 
 
-> [!NOTE] What is RampedSlowRollout Strategy?
 > **RampedSlowRollout** strategy uses **maxSurge** and **maxUnavailable** options. **maxSurge** defines maximum number of additional pods we can have at a given time, **maxUnavailable** defines the max number of unavailable pods that we can have at a given time. So if we set **maxSurge** to 1 and **maxUnavailable** to 0, one by one the new replicaset will create new pods and the old replicaSet will delete old pods. It is useful once when we want to be cautious, however it is extremely slow.
 
-> [!NOTE] What is BestEffortControlledRollout Strategy?
 > **Note:** **BestEffortControlledRollout** strategy uses **maxSurge** and **maxUnavailable** options, however instead of providing numbers, it provides percentages. so if we set **maxSurge** to 0, and **maxUnavailable** to 25%, total num of pods will be 10 (if we specified 10 replicas), and unavailable pods will be at most 25%.
 
-> [!NOTE] Why do we use Services?
 > **Note:** Services are necessary because exposing a pod on its own is not a good idea. Pods are ephemeral, they are assigned to individual IP addresses that's true but once a pod is gone, its address is also gone.  Service resource provides a static IP address to a group of pods. Beyond that, it also provides load balancing through round-robin method (sequentially each pod serves the request). Service resources also have FQDN (fully qualified domain name), so instead of IP address, we can use fqdn. Kubernetes Service types are LoadBalancer, NodePort, ClusterIP.
 > 
 
-> [!NOTE] What is ClusterIP type of Service?
 > **Note**: ClusterIP type of service exposes pods to the internal world of kubernetes cluster. It is used for resources such as databases, caches which do not need to be exposed to outerworld.
 
-> [!NOTE] What is NodePort type of Service?
 > **Note:** NodePort type of service creates a ClusterIP type of service, and maps its exposed port to one of the ports of all nodes within the cluster. With NodePort service, it is possible to access pods using the IP address of any node, and port number. However, in order to access to those pods, we need to ssh into of the nodes, and then we should do `curl localhost:<assigned_port_number>`. So, still we are not exposed to outer world.
 
-> [!NOTE] What is LoadBalancer type of Service?
 > **Note**: LoadBalancer type of service is used to expose pods to the outer world. Under the hood, it provisions nodePort type of service and then requests cloud provider to spin up a load balancer in front of these nodePorts. However, it is expensive, since it provisions a load balancer from cloud providers.
 > ![](attachment/e08860e84a5bf6f6ebbed02db59eaa3b.png)
 > 
@@ -190,7 +177,6 @@ kubectl run -it --rm --namespace=default --restart Never --image=curlimages/curl
 ```
 ---
 
-> [!NOTE] What is the FQDN of services?
 > **Note:** FQDN of services follow the template: `<service_name>.<namespace>.svc.<cluster_domain>.local`.
 > 
 
@@ -199,7 +185,6 @@ kubectl run -it --rm --namespace=default --restart Never --image=curlimages/curl
 watch kubectl get all --namespace ingress-nginx`
 ```
 
-> [!NOTE] What is deployed with Ingress Resource?
 > **Note**: Ingress resource deploys a loadBalancer type of service, and allows path based routing or host routing. 
 
 ```bash
@@ -208,7 +193,6 @@ kubectl get ingresses
 ```
 ---
 
-> [!NOTE] How different resources find each other? (Deployments, Services, Ingresses)
 > Ingresses, services, deployments literally find each other using labels and selectors. Following diagram shows their connections. Deployment configuration create replicaSet that creates 3 pods which have nginx:1.7.9 as their image. In order to expose these pods, service configuration finds these pods using their label. Following diagram has wrong definition of targetPort value (within service manifest file), since nginx container exposes port 80, thus targetPort value should be 80 as well (targetPort is the port that container exposes, and thus pod exposes). Port value is the port that is exposed by service, and that is linked to targetPort. Ingress finds backend service using its name, described in metadata field. (It should be my-service )
 > ![](attachment/14b6451dd8c15369fc6bed785f154c56.png)
 > 
@@ -219,25 +203,20 @@ kubectl get ingresses
 hey -z {load_test_duration_in_seconds 120s} -c {concurrent_user_count 100} {ip_address}
 ``` 
 
-> [!NOTE] How does HPA scales resources?
 > **Note:** HorizontalPodAutoscaler resource autoscales pod count depending on cpu usage, memory usage, or external factors such as response time and network latency. For these external factors, usage of Prometheus is a good idea, since it will allow hpa to see these metrics.
 
-> [!NOTE] What is StatefulSet Resource?
 > **Note:** StatefulSet resources are similar to deployment resources, however, they also keep track of the state via using volumes mounted on pods.  A volume mounted on one pod can't be used for another pod, and if a pod goes down and gets recreated, the same volume gets mounted on the new one. Plus, pods do not have random hash next to their names, instead, they have numbers in sequence. So, in statefulSet, pods literally have characters, they are treated as men. Headless Service is a clusterIP type of service without an IP address.
 > ![](attachment/6e546904677621a7e6e0e7f1dea59b1d.png)
 > 
 
-> [!NOTE] What are Persistent Volumes?
 > **Note:** Persistent Volumes are resources that deal with storage. It is possible to provision persistent volumes manually or dynamically. Static (Manual provisioning) can be seen in the following diagram.
 > ![](attachment/0eedca14a382369c75cc78be75fd81ce.png)
 > 
 
-> [!NOTE] What is Dynamic Provisioning for Volume Creation Purposes?
 > **Note**: Dynamic provisioning of volume is much more devops friendly, since it does not include the necessity of provisioning ssd with extra commands within cloud provider. Since we want to be cloud agnostic as much as possible, creating storageClass resource an abstracting the volume creation is much more ideal. The process can be seen in the following diagram. The best part of StorageClass resource is that once a persistentVolumeClaim is deleted, persistentVolume also gets deleted (reclaimPolicy: Delete). However, in manual provisioning has reclaimPolicy: Retain, thus even if we do not use the volume anymore, it stays there. 
 > ![](attachment/baecfeb57af5426ed4215c37b6c3fd91.png)
 > 
 
-> [!NOTE] What is DaemonSet Resource Type?
 > **Note:** DaemonSet resource ensures that a specific pod will be running on each node in the cluster. It is ideal for deploying node-specific services, ideal for log collection and monitoring agents. 
 
 ```bash
@@ -255,7 +234,6 @@ kubectl get pvc
 kubectl --dry-run=client -o yaml create deployment <deployment_name> --image=<image_name> > <deployment_yaml_file>
 ``` 
 
-> [!NOTE] How to access Pods that are running in Kind Environment?
 > **Note:** In order to use deployments, services in local kind cluster and access them, we can't use `LoadBalancer` type of service because it is not supported in kind cluster. Instead, we should expose our deployment using `NodePort` type of service, and then naturally kubernetes will map the exposedPort to one of the available ports within 30000-32767 range on nodes, which are docker containers in kind cluster. Then, we can use `kubectl get nodes -o wide` command to get the ip addresses of our nodes to connect to the pods.
 > `http://172.18.0.2:31601/` might be a sample IP address of the nodePort type of service.
 
@@ -356,17 +334,14 @@ kubectl delete namespace $NAMESPACE
 ```
 ---
 
-> [!NOTE] What would happen if I try to deploy a service which has the name that is already been used by another service in kubernetes?
 > 
 > * Kubernetes would reject the deployment, if they are in the same namespace.
 > 
 
-> [!NOTE] What is the Full Kubernetes Architecture of Blog-App?
 > **Note**: The full/whole deployment of simple-blog-app can be seen in the diagram below.
 > ![](attachment/f29ee9c57535de43f4e7b8689e86fd90.png)
 > 
 
-> [!NOTE] How services can access one and other within kubernetes?
 > service discovery -> A Service in one Kubernetes namespace can access a service in another namespace, but you need to use the fully qualified domain name (FQDN) of the service. The FQDN includes the service name, the namespace, and the cluster domain. The format is:
 > 
 > ```bash
@@ -461,7 +436,6 @@ grep frontend | awk {'print $1'}) -- /bin/sh
 ```
 ---
 
-> [!NOTE] Why we use `apiVersion: apps/v1` for deployments and `apiVersion: v1` for Services, for instance?
 > In Kubernetes, the `apiVersion` field specifies the API group and version of the resource you are defining. The difference between `api/v1` and `v1` comes down to the specific API group to which each resource belongs:
 > 1. **Deployments**:
 >     

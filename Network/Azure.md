@@ -65,7 +65,6 @@ login --query "[].name" --output tsv
 
 ```
 
-> [!NOTE] VM Connections within same Virtual Network?
 > **Note**: If we create virtual machines within the same virtual network, they will be able to create ssh connections just by using their VM names. `ssh web` would work, for instance.
 > 
 
@@ -85,7 +84,6 @@ az vm list-ip-addresses --output table
 ```
 ---
 
-> [!NOTE] Budgets vs. Cost Alerts?
 > 1. **Budgets**:
 >     
 >     - Budgets allow you to set a **financial spending limit** for a specific subscription, resource group, or service over a defined time period (e.g., monthly, quarterly).

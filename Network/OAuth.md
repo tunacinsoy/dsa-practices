@@ -1,9 +1,7 @@
 
-> [!NOTE] What is OAuth?
 > An OAuth scope is a mechanism used in OAuth 2.0 to specify the level of access that a client application is requesting when interacting with an API or a service. Scopes define the specific permissions that the client application needs, and they help to ensure that the application only gets access to the resources it requires, rather than unrestricted access to the user's data.
 > 
 
-> [!NOTE] What are the Key Concepts of OAuth Scopes?
 > 
 > 1. **Permission Granularity**: Scopes allow you to specify fine-grained permissions. For example, an application might request only read access to a user's calendar rather than full read/write access.
 > 
@@ -13,7 +11,6 @@
 > 
 > 4. **Service-Specific Scopes**: Different services define their own scopes. For example, Google Cloud, Google APIs, GitHub, and Facebook all have different sets of scopes that can be requested by client applications.
 
-> [!NOTE]  What is the Use Case of OAuth in the Context of Google Cloud using Terraform?
 > 
 > In the Terraform code provided down below, there's an OAuth scope:
 > 
@@ -54,7 +51,6 @@
 > 
 > This scope, `https://www.googleapis.com/auth/cloud-platform`, is a Google Cloud OAuth scope that grants the client full access to all Google Cloud services. It’s a broad scope that allows the application or service account to perform any action across the entire Google Cloud Platform, including managing resources, accessing APIs, and interacting with various services.
 
-> [!NOTE] What are the Example Scenarios of OAuth Scopes?
 > - **Read-only Access**: An application might request a read-only scope for accessing Google Drive files, like `https://www.googleapis.com/auth/drive.readonly`.
 > - **Limited API Access**: An app might request only the ability to read a user's email address and basic profile information, using scopes like `email` and `profile`.
 > - **Cloud Platform Access**: As in Terraform example provided above, a service account might need broad access to manage resources across Google Cloud, which would require a scope like `https://www.googleapis.com/auth/cloud-platform`.

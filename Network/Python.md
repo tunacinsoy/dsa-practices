@@ -565,7 +565,6 @@ except IsADirectoryError:
 
 ---
 
-> [!NOTE] What are the differences between sets and lists?
 > 
 > Python **lists** and **sets** are both collections but have key differences in their behavior and use cases:
 > ### 1. **Duplicates**
@@ -601,7 +600,6 @@ except IsADirectoryError:
 > print(my_set) # Output: {1, 2, 3} (duplicates removed)
 > ```
 
-> [!NOTE] What are the differences between tuples and sets?
 > ### **Tuple**
 > 
 > - **Ordered**: The elements in a tuple maintain their sequence.
@@ -630,7 +628,6 @@ except IsADirectoryError:
 
 ---
 
-> [!NOTE] What is the difference between Classes and Modules?
 > 
 > The difference between **classes** and **modules** in Python lies in their purpose and scope:
 > ###### **1. Modules**
@@ -645,7 +642,6 @@ except IsADirectoryError:
 > - **Scope:** Local to the module or program. You need to instantiate a class to use its behavior.
 > 
 
-> [!NOTE] What's the difference between private and protected fields?
 > For encapsulation purposes, Python follows the principle of **consenting adults**, meaning it trusts developers to respect conventions like:
 > - `_balance`: Protected, meant for internal use, but still accessible.
 > - `__balance`: Private, harder to access without intentional effort.

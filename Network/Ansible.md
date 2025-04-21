@@ -1,6 +1,5 @@
 
 ---
-> [!NOTE] What is Ansible?
 > Ansible is a configuration management tool that follows Configuration-as-Code (CaC) principle. It uses ssh to communicate with managed nodes, thus we do not need to install agents on these nodes. The architecture of Ansible contains control node, and managed nodes. Control node must have Ansible installed, and the managed nodes should allow SSH connection that is coming from control node. The architecture can be seen down below.
 > 
 > ![](attachment/4819492abef74aa0a3f9eb287555e2b0.png)
@@ -44,7 +43,6 @@ EOF
 ```
 ---
 
-> [!NOTE] What is an Inventory file in Ansible?
 > **Note**: An inventory file within Ansible is a file that allows you to group your managed nodes according to roles. For example, you can define roles such as webserver and dbserver and group related servers together. The default location of the Ansible inventory file is `/etc/ansible/hosts`. If you look at the `/etc/ansible` directory ownership using `ls -l /etc/ansible`, it is owned by the root user. We want to use the ansible user that we created for security purposes. Therefore, we must change the /etc/ansible directory ownership and its subdirectories and files to ansible using:
 > ```bash
 > sudo chown -R ansible:ansible /etc/ansible
@@ -67,7 +65,6 @@ EOF
 > ```
 > 
 
-> [!NOTE]
 > **Note**: Ansible needs to know where the inventory file is located. If we manage multiple applications, with each application in its Git repositories, having a local ansible.cfg file in every repository will help keep the applications decentralized. It will also enable GitOps and make Git the single source of truth. And if we create an `ansible.cfg` file in our current directory it overrides existing .cfg files in home directory of the current user or in /etc/ansible directory. Following ansible.cfg file tells to ansible that the inventory file is located at this path.
 > ```cfg
 > [defaults]
@@ -97,7 +94,6 @@ ansible --list-hosts <role_name webservers>
 ansible <role_name all> -m ping #-m flag stands for module
 ```
 
-> [!NOTE] What are Ansible Tasks?
 > **Note**: Ansible tasks are basic functions that we want to perform on hosts, and ansible modules are reusable codes for particular function. For instance, following command uses shell module:
 > ```bash
 > # -m stands for module, -a stands for the parameters of this module, all specifies which group of hosts will be responsible for execution
@@ -111,10 +107,8 @@ ansible <role_name all> -m ping #-m flag stands for module
 > ```
 > 
 
-> [!NOTE] What are the Outputs From Ansible Task Executions?
 > **Note**: The tasks have three possible statuses, and they are success, changed and failure. The SUCCESS status denotes that the task was successful, and Ansible took no action. The CHANGED status denotes that Ansible had to change the existing configuration to apply the expected configuration, and FAILURE denotes an error while executing the task.
 
-> [!NOTE] How to Achieve Idempotency in Ansible?
 > **Note**: We want to make ansible configurations as idempotent as possible. For instance, both of these commands download python3, however using `apt` module is better to use, since it is more specific to task that we want to do.
 > ```
 > ansible all -m apt -a "name=python3"
@@ -123,7 +117,6 @@ ansible <role_name all> -m ping #-m flag stands for module
 > ```
 > 
 
-> [!NOTE] What are Ansible Playbooks?
 > **Note**: Ansible playbooks are a collection of tasks that produce the desired configuration within the managed nodes. Ansible playbooks consist of multiple plays, and each play is mapped to a group of hosts using a role and consists of a series of tasks required to achieve them.
 > ![](attachment/1a38c9c0709d761bd934b1f672320dd9.png)
 > An example of a playbook can be seen below. Each play consists of a hosts
@@ -186,7 +179,6 @@ nored=0
 	  service: name=apache2 state=restarted
 ```
 
-> [!NOTE] What are Ansible Roles?
 > Ansible roles help to standardize an Ansible setup and promote reusability. With roles, we can automatically load var files, handlers, tasks, and other Ansible artifacts using a standard directory structure relative to your playbooks. The directory structure can be seen as follows:
 > ![](attachment/52e614d82c75a1558e6658d00d4ce92e.png)
 > 
@@ -201,7 +193,6 @@ nored=0
 > So we can have roles named as apache, mysql and common. They are loosely coupled, none of them have any dependency on another one. And their names are specific, since we are not doing naming them as webserver or dbserver.
 
 
-> [!NOTE] How Roles are Assigned in Root Playbook File?
 > **Note**: The playbook.yaml file that is in the root directory comprises all roles. For webservers, it implies that common and apache roles will be executed, and for dbservers common and mysql roles will be executed.
 > ```yaml
 > ---

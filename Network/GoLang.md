@@ -1,5 +1,4 @@
 
-> [!NOTE] What are the basic numeric types/variables in Go?
 > Go has 15 different numeric types that fall into the three categories: `int`, `float`, and `complex`. That means there are fifteen different ways to describe a number in Go. This includes 11 different integer types, 2 different floating-point types, and 2 different complex number types.
 > 
 > ![](attachment/e6ad92df970de1827d78a7b89ca549a9.png)
@@ -12,7 +11,6 @@
 > 
 > In the example above `pointerForInt` will store the address of a variable that has an `int` data type. To break it down further, the `*` operator signifies that this variable will store an address and the `int` portion means that the address contains an integer value.
 
-> [!NOTE] What is `dereferencing`?
 > 
 > In our example, we have our variables: `lyrics` that has the value of `"Moments so dear"` and `pointerForStr` which is a pointer for `lyrics`. Then we use the `*` operator on `pointerForStr` to dereference it and assign a new value of `"Journeys to plan"`. When we check the value of `lyrics` it’s now `"Journeys to plan"`!
 > 
@@ -192,16 +190,13 @@ go run hw.go
 ```
 ---
 
-> [!NOTE] When to use `go run` versus `go build`?
 > Using go run is a better choice when testing code. However, if you want to create
 > and distribute an executable binary, then go build is the way to go.
 
-> [!NOTE] What's the general way of reading user input?
 > 
 > The `fmt.Scanln()` function is rarely used to get user input. Usually, user input is
 > read from command line arguments (os.Args) or external files. However, interactive command line applications need `fmt.Scanln()`.
 
-> [!NOTE] How does `os.Args` slice work?
 > 
 > ![](attachment/b9a0b52674a5802c0e437cca26f34804.png)
 > 
@@ -214,10 +209,8 @@ go run hw.go
 fmt.Printf("Prefix: %T, %v\n", strings.HasPrefix("Tuna", "un"), strings.HasPrefix("Tuna", "un")) // bool, false
 ```
 
-> [!NOTE] What exactly `rune` is?
 > In Go, `rune` is an alias for `int32`, which means it is a 32-bit integer used to represent Unicode code points.
 
-> [!NOTE] When do `const` and `var` variables get their values?
 > **const** variables are getting their values during the **compile time**. This can be expressed like the following:
 > ```go
 > const PI = 3.14
@@ -240,7 +233,6 @@ fmt.Printf("Prefix: %T, %v\n", strings.HasPrefix("Tuna", "un"), strings.HasPrefi
 > }
 > ```
 
-> [!NOTE] What  are the characteristics of arrays?
 > - When defining an array variable, you must define its size. Otherwise, you should put
 > [...] in the array declaration and let the Go compiler find out the length for you. So you
 > can create an array with 4 string elements either as:
@@ -249,7 +241,6 @@ fmt.Printf("Prefix: %T, %v\n", strings.HasPrefix("Tuna", "un"), strings.HasPrefi
 >  If you put nothing in the square brackets, then a slice is going to be created instead. As it contains four elements, the (valid) indexes for that array are 0, 1, 2, and 3.
 >  - You cannot change the size of an array after you have created it.
 
-> [!NOTE] What does slice value contain?
 > A slice value is a header that contains a pointer to an underlying array where the elements are actually stored, the length of the array, and its capacity.
 > ```go
 > type SliceHeader struct {
@@ -260,11 +251,9 @@ fmt.Printf("Prefix: %T, %v\n", strings.HasPrefix("Tuna", "un"), strings.HasPrefi
 > }
 > ```
 
-> [!NOTE] How does capacity work in slices?
 > 
 > ![](attachment/d5b83e3ab052ac2f53bc781d1cc938c2.png)
 
-> [!NOTE] What's the difference between **byte** and **rune** ?
 > 
 > As Go does not have a data type for storing single characters, it uses byte and rune for
 > storing character values. A single byte can store a single ASCII character only whereas
@@ -272,7 +261,6 @@ fmt.Printf("Prefix: %T, %v\n", strings.HasPrefix("Tuna", "un"), strings.HasPrefi
 > 
 > `rune` is an alias for `int32`, whereas `byte` is an alias for `uint8`. So, a rune can contain ascii characters as well as unicode characters.
 
-> [!NOTE] When to use `rune` when to use `byte`?
 > - **`[]byte`**: Use when working with ASCII text, binary data, or when performance and memory usage are concerns (since `byte` is more compact).
 > - **`[]rune`**: Use when dealing with text that may include non-ASCII characters, such as characters from different languages or special symbols, because `rune` can represent any Unicode character.
 >  
@@ -280,27 +268,21 @@ fmt.Printf("Prefix: %T, %v\n", strings.HasPrefix("Tuna", "un"), strings.HasPrefi
 > - If you only need to handle simple English text, `[]byte` is sufficient.
 > - For internationalization or dealing with diverse character sets, `[]rune` is necessary.
 
-> [!NOTE] How does copy() function work?
 > 
 > ![](attachment/97e522144d08b926db5fe24c9b465188.png)
 
-> [!NOTE] Why we do not use pointers for slices that will be used in functions?
  > Slices are passed to functions without the need to use a pointer—it is Go that
 > passes the pointer to the underlying array of a slice and there is no way to change that behavior.
 
-> [!NOTE] When to use **arrays**, **slices**, **maps** or **structs**?
 > The general idea is that if an array or a slice cannot do the job, you might need to look at maps. If a map cannot help you store your data the way you want, then you should consider creating and using a structure.
 
-> [!NOTE] What are the Regular Expressions in Go?
 > ![](attachment/8d5c1c280d35c39d5c684ba107e7bec5.png)
 > Characters presented in the table are used for constructing and defining the grammar of a regular expression.
 
-> [!NOTE] What is Generic Programming?
 > Generic programming is a programming paradigm that allows the developer to implement a function using one or more data types that are going to be provided at a later time.
 > 
 > Generics is a feature that allows you the capability of not precisely specifying the data type of one or more function parameters, mainly because you want to make your functions as universal as possible.
 
-> [!NOTE] Generic type declarations look similar to array/slice definitions, what's the difference?
 > When you see `list[T any]`, you should **not** think about arrays or slices, even though the syntax looks similar to defining slices or arrays.
 > ### Differences:
 > 
@@ -352,20 +334,15 @@ func main() {
 }
 ```
 
-> [!NOTE] What's the difference between modules and packages?
 > Packages are the way of organizing, delivering, and using code. Modules are collections of packages. So, A **module** is a collection of packages, while a **package** is a collection of files.
 
-> [!NOTE] What's the order of execution, if main package imports package a, and package a has dependency on package b?
 > ![](attachment/a5dd2186d22d35944e28485390481a01.png)
 > ![](attachment/460e57775a6ec2b9795a3d865e56cdfe.png)
 
-> [!NOTE] What is GO111MODULE env variable?
 > GO111MODULE environment variable controls the behavior of whether to check the go.mod and go.sum files. If we set it to on, go compiler will look for the go.mod and go.sum files for dependencies. The default value is auto, which means that if there's a go.mod file there, it will look at it, if not, it will look at GOPATH value which is ~/go/src.
 
-> [!NOTE] How does Go capture inputs, outputs and errors?
 > Go uses os.Stdin to access standard input, os.Stdout to access standard output, and os.Stderr to access standard error.
 
-> [!NOTE] What are `marshaling` and `unmarshaling`?
 > Marshaling is the process of converting a Go structure into a JSON record. You usually want that for transferring JSON data via computer networks or for saving it on disk. Unmarshaling is the process of converting a JSON record given as a byte slice into a
 > Go structure. You usually want that when receiving JSON data via computer networks or when loading JSON data from disk files.
 > 
@@ -374,17 +351,14 @@ is not making the required fields of your Go structures exported, that is having
 first letter in uppercase. When you have issues with marshaling and unmarshaling,
 begin your debugging process from there.
 
-> [!NOTE] any vs. interface
 > In Go, the key difference between `any` and `interface{}` is **semantics**, not functionality. Both are effectively the same and are interchangeable, as `any` is just an alias for `interface{}` introduced in Go 1.18 to improve readability and align with modern usage.
 > 
 > Use `any` for readability in newer Go code. Stick with `interface{}` if maintaining legacy code for consistency.
 
-> [!NOTE] How the external package dependencies are handled in GoLang?
 > When we run `go mod init`, the go.mod file gets created, and once we run `go mod tidy`, the packages that are stated under `import` part of the code gets downloaded, and they are put into `~/go/pkg/mod/github.com/spf13` for viper package, for instance. 
 > 
 > In the background, what I observe that happens is that the `go mod tidy` command downloads the packages mentioned in the code, just like running `go install github.com/spf13/viper`. 
 > 
 
-> [!NOTE] So why do we need to download cobra-cli explicitly?
 >  Because cobra-cli is rather than a framework that allows you to create command line interface. We use commands like `cobra-cli init` and `cobra-cli add`, to build the CLI.
 

@@ -129,7 +129,6 @@
 > - After "być" we use the instrumental case, so for masculine nouns we add "-em".
 > - After "być" we use the instrumental case, so for feminine nouns we change "-a" into "-ą".
 
-> [!NOTE] How to answer `Czym się zajmujesz? = What do you do?`?
 > - Jestem **lekarzem**. = I am a doctor.
 > - Pracuję jako lekarz. = I work as a doctor.
 

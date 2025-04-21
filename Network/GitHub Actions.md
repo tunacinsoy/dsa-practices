@@ -1,5 +1,4 @@
 
-> [!NOTE] What is GitHub Actions?
 > **Note**: A GitHub Actions workflow is a simple YAML file that contains the build steps. We must create this workflow in the `.github/workflows` directory within the repository. Versioning can be achieved by the following `build.yaml` file.
 > ```yaml
 > name: Build and Test App

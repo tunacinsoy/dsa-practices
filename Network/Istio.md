@@ -63,7 +63,6 @@ istioctl analyze --n blog-app
 
 VirtualServices are like some rulesets that are associated with either services or ingresses in k8s cluster. 
 
-> [!NOTE] What is the Difference Between **VirtualService** and **DestinationRule** resources?
 > ### **VirtualService**
 > 
 > - **Purpose**: Controls the routing of traffic to services within the mesh.
@@ -107,15 +106,12 @@ VirtualServices are like some rulesets that are associated with either services 
 >     - **DestinationRule**: Configures `v1` and `v2` subsets with specific load balancing or security settings, such as round-robin load balancing or mTLS.
 
 
-> [!NOTE] What is Canary Roll-out (Canary Deployment)?
 > Canary Roll-out, often referred as Blue-Green deployment, is the deployment strategy that allows to deploy the new/updated version alongside the previous version. With the usage of `VirtualService` and `DestinationRule` resources of Istio, incoming traffic can be distributed between these two different versions. If everything goes well, maintainers can incrementally increase the percentage of traffic that is directed to new version.
 > ![](attachment/2fe30b7230de83aa636493bb8eed332a.png)
 
 
-> [!NOTE] What is Staging Environment and its pros/cons?
 > Traditionally, many enterprises maintained a staging environment that closely mimicked the production setup. The Ops team deployed new releases to the staging environment in this setup while testers generated synthetic traffic to simulate real-world usage. This approach provided a means for teams to evaluate how the code would perform in the production environment, assessing its functional and non- functional aspects before promoting it to production. The staging environment served as the ground for performance, volumetric, and operational acceptance testing. While this approach had its merits, it was not without its challenges. Maintaining static test environments, which involved substantial costs and resources, was one of them. Creating and sustaining a replica of the production environment required a team of engineers, leading to high overhead. Moreover, synthetic traffic often deviated from real live traffic since the former relied on historical data,while the latter reflected current user interactions. This  discrepancy occasionally led to overlooked scenarios.
 
-> [!NOTE] How Does Traffic Mirroring Work?
 > 1. Deploy a new version of the application and activate traffic mirroring.
 > 2. The old version continues to respond to requests as usual but concurrently sends an asynchronous copy of the traffic to the new version.
 > 3. The new version processes the mirrored traffic but refrains from responding to end users.

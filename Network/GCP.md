@@ -131,7 +131,6 @@ gcloud storage buckets create gs://<gcs_bucket_name tf-state-sba-terraform-${PRO
 gcloud projects delete <PROJECT_ID>
 ```
 
-> [!NOTE] Why Do We Use Prefixes in GCS Bucket?
 > 
 > ```hcl
 > terraform {
